@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Jsonp, URLSearchParams, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { IPhotoModel } from './app.model';
+import { Http, Jsonp, URLSearchParams } from '@angular/http';
 
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -17,35 +16,18 @@ export class FlickrService {
 
     getPhotos(filter: string = ""): Observable<any> {
         let params = new URLSearchParams();
-//        params.set('search', filter); // the user's search value
+        params.set('tags', filter); // the user's search value
         params.set('method', 'flickr.people.getPublicPhotos');
         params.set('format', 'json');
         params.set('jsoncallback', 'JSONP_CALLBACK');
 
         return this.jsonp.get(this.API_BASE, { search: params })
-            .map(response =>
-                response.json()
-            );
-//            .catch(this.errorHandler);
-    }
-
-    getItems(stream: any) {
-        console.log("stream",stream.items);
-        return stream.items as IPhotoModel[];
-
+            .map(response =>response.json())
+            .catch(this.errorHandler);
     }
 
     private errorHandler(error) {
         console.log('error', error);
         return Observable.throw(error);
     }
-
-    getPromise() {
-        return this.jsonp.get(this.API_BASE)
-            .map((response: any) =>
-                response.json()
-            )
-            .toPromise();
-    }
-    
 }

@@ -1,16 +1,23 @@
-<h1>
-    {{title}}
-</h1>
-
 <div class="container">
-    <div class="row">
+    <div class="row text-center stickyHeader" style="display: inline">
+        <span>
+            Search Flicker:
+        </span>
         <input type="text" [formControl]="filterParams" placeholder="Search..."/>
     </div>
 
-    <div style="color: red">{{photos?.length}}</div>
-    <div *ngFor="let photo of photos">
-        
-        <div style="color: red">laaaaaaaaaaa</div>
-        <div style="color: red">{{photo}}</div>
+    <div class="row content">
+        <div class="col-xs-4" *ngFor="let photo of photos">
+            <div class="card">
+                <div class="card-image">
+                    <div class="card-title">{{photo.author}}</div>
+                    <a href="{{photo.media.m}}" target="_blank">
+                        <img src={{photo.media.m}}/>
+                    </a>
+                    <div class="card-title">{{photo.tags}}</div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
