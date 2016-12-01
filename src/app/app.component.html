@@ -1,23 +1,15 @@
+<div class="header">
+    <div>
+        <input type="text" [formControl]="filterParams" placeholder="Search..." class="search" />
+    </div>
+
+</div>
 <div class="container">
-    <div class="row text-center stickyHeader" style="display: inline">
-        <span>
-            Search Flicker:
-        </span>
-        <input type="text" [formControl]="filterParams" placeholder="Search..."/>
+    <div class="galleryItem" *ngFor="let photo of photos">
+        <a href="#" (click)="imageClicked(photo.media.m)" target="_blank">
+            <img src={{photo.media.m}} />
+        </a>
+        <h3>{{photo.author}}</h3>
+        <p>{{photo.tags}}</p>
     </div>
-
-    <div class="row content">
-        <div class="col-xs-4" *ngFor="let photo of photos">
-            <div class="card">
-                <div class="card-image">
-                    <div class="card-title">{{photo.author}}</div>
-                    <a href="{{photo.media.m}}" target="_blank">
-                        <img src={{photo.media.m}}/>
-                    </a>
-                    <div class="card-title">{{photo.tags}}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>

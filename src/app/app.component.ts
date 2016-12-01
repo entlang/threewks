@@ -16,8 +16,6 @@ import "rxjs/add/operator/map";
     providers: [FlickrService]
 })
 export class AppComponent {
-    title = "Flickr search";
-
     filterParams = new FormControl();
     photos: Array<any>=[];
 
@@ -30,5 +28,15 @@ export class AppComponent {
                 console.log(res.items);
                 this.photos = res.items;
             });
+    }
+    replaceCharAtIndex(item: string, index: number, char: any) {
+        let a = item.split("");
+        a[index] = char;
+        return a.join("");
+    }
+
+    imageClicked(imageUrl: string) {
+        let newUrl = this.replaceCharAtIndex(imageUrl, imageUrl.length - 5, 'c');
+        window.open(newUrl, '_blank');
     }
 }
